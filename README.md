@@ -44,8 +44,10 @@ npm run test
 ```
 # Evidencias
 
-![alt text](./fotos/Captura-de-tela-2026-10-13-193349.png)
+![alt text](fotos/Captura-de-tela-2026-10-13-193426.png)
 
-![alt text](fotos/Captura-de-tela-2026-10-13-193416.png)
+![alt text](fotos/Captura-de-tela-2026-10-13-193426.png)
+
+![alt text](fotos/Captura-de-tela-2026-10-13-200547.png)
 
 ![alt text](fotos/Captura-de-tela-2026-10-13-193426.png)
