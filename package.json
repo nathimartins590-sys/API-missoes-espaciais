@@ -12,12 +12,15 @@
   },
   "license": "ISC",
   "author": "Nathalia",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env TEST=true node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "dev": "node --watch index.js",
+    "prod": "node index.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1"

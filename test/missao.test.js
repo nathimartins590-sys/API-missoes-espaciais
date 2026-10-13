@@ -66,72 +66,58 @@ test("GET /missoes/:id retorna erro quando a missão não existe", async () => {
 });
 
 test("POST /missoes retorna erro quando o nome não é informado", async () => {
-  const resposta = await request(app).post("/livros")
-    .send({ ano: "A sem título" });
+  const resposta = await request(app).post("/missoes")
+    .send({ ano: "A sem nome" });
 
   expect(resposta.status).toBe(400);
-  expect(resposta.body.error).toBe("Título é obrigatório");
+  expect(resposta.body.error).toBe("Nome é obrigatório");
 });
 
-test("POST /livros aceita disponibilidade informada", async () => {
-  const resposta = await request(app).post("/livros")
-    .send({ titulo: "Livro disponível", autor: "Autor", disponivel: true });
-
-  expect(resposta.status).toBe(201);
-  expect(resposta.body.disponviel).toBe(true);
-});
-
-test("POST /livros usa indisponibilidade quando ela não é informada", async () => {
-  const resposta = await request(app).post("/livros")
-    .send({ titulo: "Livro sem disponibilidade", autor: "Autor", disponivel: false });
-
-  expect(resposta.status).toBe(201);
-  expect(resposta.body.disponviel).toBe(false);
-});
-
-test("PUT /livros/:id atualiza os campos informados", async () => {
-  const resposta = await request(app).put("/livros/1")
-    .send({ titulo: "Título atualizado", autor: "Novo autor", disponivel: true });
+test("PUT /missoes/:id atualiza os campos informados", async () => {
+  const resposta = await request(app).put("/missoes/1")
+    .send({ nome: "Nome atualizado", ano: "ano da missão", agencia: "nome da agencia", status: "status da missão" });
 
   expect(resposta.status).toBe(200);
   expect(resposta.body).toMatchObject({
     id: 1,
-    titulo: "Título atualizado",
-    autor: "Novo autor",
-    disponivel: true
+    nome: "Nome atualizado",
+    ano: "Ano da missão",
+    agencia: "nome da agencia",
+    status: "status da missão"
   });
 });
 
-test("PUT /livros/:id preserva os campos quando recebem valores vazios ou falsos", async () => {
-  const resposta = await request(app).put("/livros/1")
-    .send({ titulo: "", autor: "", disponivel: false });
+test("PUT /missoes/:id preserva os campos quando recebem valores vazios ou falsos", async () => {
+  const resposta = await request(app).put("/missoes/1")
+    .send({ titulo: "", autor: "", agencia: "", status: "" });
 
   expect(resposta.status).toBe(200);
   expect(resposta.body).toMatchObject({
-    titulo: "Título atualizado",
-    autor: "Novo autor",
-    disponivel: true
+    nome: "Nome atualizado",
+    ano: "Ano da missão",
+    agencia: "nome da agencia",
+    status: "status da missão"
   });
 });
 
-test("PUT /livros/:id retorna erro quando o livro não existe", async () => {
-  const resposta = await request(app).put("/livros/999")
-    .send({ titulo: "Título" });
+test("PUT /missoes/:id retorna erro quando a missao não existe", async () => {
+  const resposta = await request(app).put("/missoes/999")
+    .send({ nome: "Nome" });
 
   expect(resposta.status).toBe(404);
-  expect(resposta.body).toEqual({ error: "Livro não encontrado" });
+  expect(resposta.body).toEqual({ error: "Missão não encontrado" });
 });
 
-test("DELETE /livros/:id remove o livro encontrado", async () => {
-  const resposta = await request(app).delete("/livros/4");
+test("DELETE /missoes/:id remove a missao encontrado", async () => {
+  const resposta = await request(app).delete("/missoes/4");
 
   expect(resposta.status).toBe(204);
   expect(resposta.body).toEqual({});
 });
 
-test("DELETE /livros/:id retorna erro quando o livro não existe", async () => {
-  const resposta = await request(app).delete("/livros/999");
+test("DELETE /missoes/:id retorna erro quando a missao não existe", async () => {
+  const resposta = await request(app).delete("/missoes/999");
 
   expect(resposta.status).toBe(404);
-  expect(resposta.body).toEqual({ error: "Livro não encontrado" });
+  expect(resposta.body).toEqual({ error: "Missão não encontrado" });
 });

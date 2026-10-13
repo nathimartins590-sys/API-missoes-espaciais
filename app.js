@@ -156,7 +156,7 @@ app.post('/missoes', (req, res)=>{
             nome : nome,
             ano : ano,
             agencia: agencia,
-            disponviel: req.body?.disponivel || false
+            status: req.body?.status || false
         }
 
         missoes.push(novaMissao);
